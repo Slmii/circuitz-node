@@ -12,11 +12,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-app.use('/', (_req, res) => {
-	res.status(200).json({
-		message: 'Hello World!'
-	});
-});
 app.use('/icc', iccRoutes);
 app.use(errorHandler);
 
