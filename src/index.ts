@@ -6,7 +6,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 const app = express();
-const PORT = 3002;
+const PORT = process.env.PORT || 3002;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -17,5 +17,5 @@ app.use(errorHandler);
 
 // Server setup
 app.listen(PORT, () => {
-	console.log(`TypeScript with Express http://localhost:${PORT}/`);
+	console.log(`Example app is listening on port ${PORT}.`);
 });
