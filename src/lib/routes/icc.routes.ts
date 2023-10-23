@@ -7,7 +7,7 @@ import { ICC } from 'lib/types';
 const iccRoutes = express.Router();
 
 iccRoutes.post('/', validate(iccSchema), async (req: Request<any, any, ICC>, res: Response, _next: NextFunction) => {
-	console.log('ICC Call', req.body);
+	console.log('ICC Call', req.body, req.headers['Idempotency-Key']);
 
 	const canister = ic(req.body.canisterId);
 	const response = await canister.call(req.body.methodName, ...req.body.args);
