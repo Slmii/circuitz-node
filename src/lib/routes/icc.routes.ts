@@ -9,10 +9,10 @@ const iccRoutes = express.Router();
 iccRoutes.post('/', validate(iccSchema), async (req: Request<any, any, ICC>, res: Response, _next: NextFunction) => {
 	console.log('ICC Call', req.body, req.headers['Idempotency-Key']);
 
-	const canister = ic(req.body.canisterId);
-	const response = await canister.call(req.body.methodName, ...req.body.args);
+	// const canister = ic(req.body.canisterId);
+	// const response = await canister.call(req.body.methodName, ...req.body.args);
 
-	res.status(200).json(response);
+	res.status(200).json(req.body);
 });
 
 export { iccRoutes };
