@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 3002;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors({ origin: true }));
+app.use(cors({ origin: '*' }));
 
 app.use('/icc', iccRoutes);
 app.use(errorHandler);
