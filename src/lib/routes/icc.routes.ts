@@ -1,8 +1,8 @@
 import express, { NextFunction, Request, Response } from 'express';
 import ic from 'ic0';
 import { validate } from 'lib/middlewares';
-import { iccSchema } from 'lib/schemas';
-import { ICC } from 'lib/types';
+import { apiSchema, iccSchema } from 'lib/schemas';
+import { ApiICC, ICC } from 'lib/types';
 
 const iccRoutes = express.Router();
 
@@ -41,5 +41,23 @@ iccRoutes.post('/', validate(iccSchema), async (req: Request<any, any, ICC>, res
 
 	res.status(200).json(replaceBigIntWithNumber(response));
 });
+
+iccRoutes.post(
+	'/api',
+	validate(apiSchema),
+	async (req: Request<any, any, ApiICC>, res: Response, _next: NextFunction) => {
+		console.log('ICC Call to API forwarding', req.body, req.headers);
+
+		const response = await fetch(req.body.url, {
+			method: req.body.method,
+			headers: Object.fromEntries(req.body.headers ?? []),
+			body: req.body.requesyBody
+		});
+
+		const data = await response.json();
+
+		res.status(200).json(data);
+	}
+);
 
 export { iccRoutes };

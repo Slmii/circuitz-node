@@ -3,3 +3,10 @@ export interface ICC {
 	canisterId: string;
 	args: Array<unknown>;
 }
+
+export interface ApiICC {
+	url: string;
+	method: string;
+	requesyBody?: string;
+	headers?: Array<[string, string]>;
+}
