@@ -49,22 +49,18 @@ iccRoutes.post(
 	async (req: Request<any, any, ApiICC>, res: Response, _next: NextFunction) => {
 		console.log('ICC Call to API forwarding', req.body, req.headers);
 
-		// const response = await fetch(req.body.url, {
-		// 	method: req.body.method,
-		// 	headers: req.body.headers,
-		// 	body: req.body.requesyBody
-		// });
+		try {
+			const { data } = await axios({
+				method: req.body.method,
+				url: req.body.url,
+				headers: req.body.headers,
+				data: req.body.requestBody ? JSON.parse(req.body.requestBody) : undefined
+			});
 
-		// const data = await response.json();
-
-		const { data } = await axios({
-			method: req.body.method,
-			url: req.body.url,
-			headers: req.body.headers,
-			data: req.body.requestBody ? JSON.parse(req.body.requestBody) : undefined
-		});
-
-		res.status(200).json(data);
+			res.status(200).json(data);
+		} catch (error) {
+			res.status(200).json({ error: (error as Error).message });
+		}
 	}
 );
 
