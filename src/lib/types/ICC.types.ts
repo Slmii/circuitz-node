@@ -7,6 +7,6 @@ export interface ICC {
 export interface ApiICC {
 	url: string;
 	method: string;
-	requesyBody?: string;
+	requestBody?: string;
 	headers?: Record<string, string>;
 }

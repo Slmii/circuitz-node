@@ -3,7 +3,7 @@ import ic from 'ic0';
 import { validate } from 'lib/middlewares';
 import { apiSchema, iccSchema } from 'lib/schemas';
 import { ApiICC, ICC } from 'lib/types';
-import fetch from 'node-fetch';
+import axios from 'axios';
 
 const iccRoutes = express.Router();
 
@@ -49,13 +49,20 @@ iccRoutes.post(
 	async (req: Request<any, any, ApiICC>, res: Response, _next: NextFunction) => {
 		console.log('ICC Call to API forwarding', req.body, req.headers);
 
-		const response = await fetch(req.body.url, {
-			method: req.body.method,
-			headers: req.body.headers,
-			body: req.body.requesyBody
-		});
+		// const response = await fetch(req.body.url, {
+		// 	method: req.body.method,
+		// 	headers: req.body.headers,
+		// 	body: req.body.requesyBody
+		// });
 
-		const data = await response.json();
+		// const data = await response.json();
+
+		const { data } = await axios({
+			method: req.body.method,
+			url: req.body.url,
+			headers: req.body.headers,
+			data: req.body.requestBody ? JSON.parse(req.body.requestBody) : undefined
+		});
 
 		res.status(200).json(data);
 	}
