@@ -3,6 +3,7 @@ import ic from 'ic0';
 import { validate } from 'lib/middlewares';
 import { apiSchema, iccSchema } from 'lib/schemas';
 import { ApiICC, ICC } from 'lib/types';
+import fetch from 'node-fetch';
 
 const iccRoutes = express.Router();
 
