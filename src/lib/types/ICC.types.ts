@@ -8,5 +8,5 @@ export interface ApiICC {
 	url: string;
 	method: string;
 	requesyBody?: string;
-	headers?: Array<[string, string]>;
+	headers?: Record<string, string>;
 }

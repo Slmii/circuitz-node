@@ -4,7 +4,7 @@ export const apiSchema = object({
 	body: object({
 		url: string().required('Endpoint is required'),
 		method: string().required('Method is required'),
-		headers: array().optional(),
+		headers: object().optional(),
 		requesyBody: string().optional()
 	})
 });

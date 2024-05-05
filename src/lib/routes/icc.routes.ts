@@ -50,7 +50,7 @@ iccRoutes.post(
 
 		const response = await fetch(req.body.url, {
 			method: req.body.method,
-			headers: Object.fromEntries(req.body.headers ?? []),
+			headers: req.body.headers,
 			body: req.body.requesyBody
 		});
 
