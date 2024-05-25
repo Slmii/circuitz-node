@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import { iccRoutes } from 'lib/routes';
+import { iccRoutes, jwtRoutes } from 'lib/routes';
 import { errorHandler } from 'lib/middlewares';
 import dotenv from 'dotenv';
 
@@ -13,6 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 app.use('/icc', iccRoutes);
+app.use('/jwt', jwtRoutes);
 app.use(errorHandler);
 
 // Server setup
